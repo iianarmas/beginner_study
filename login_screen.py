@@ -8,7 +8,6 @@ from kivymd.uix.dialog import MDDialog
 
 
 class DemoApp(MDApp):
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.screen = Screen()
@@ -19,11 +18,12 @@ class DemoApp(MDApp):
         close_err_button = MDFlatButton(text='Try Again', font_style='Button',
                                         on_press=self.close_err_dialog)
 
-        self.dialog_welcome = MDDialog(title='Verified User', text=f'Welcome {self.username.text}!',
+        self.dialog_welcome = MDDialog(title='Verified User', text=f'Welcome! You will now be redirected.',
                                        buttons=[close_button, more_button])
         self.dialog_err = MDDialog(title='Error!', text='Please enter your username', buttons=[close_err_button])
 
     def on_button_release(self, obj):
+
         if self.username.text:
             self.dialog_welcome.open()
         else:
@@ -38,12 +38,14 @@ class DemoApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = 'Green'
 
-        login = MDLabel(text='Login', halign='center', theme_text_color='Custom',
-                        pos_hint={'center_x': 0.5, 'center_y': 0.62}, text_color=(71 / 255, 139 / 255, 64 / 255, 1))
+        login_label = MDLabel(text='Login', halign='center', font_style='H4', theme_text_color='Custom',
+                              pos_hint={'center_x': 0.5, 'center_y': 0.62},
+                              text_color=(71 / 255, 139 / 255, 64 / 255, 1))
+
         button = MDRectangleFlatButton(text='Show', pos_hint={'center_x': 0.5, 'center_y': 0.38},
                                        on_release=self.on_button_release)
 
-        self.screen.add_widget(login)
+        self.screen.add_widget(login_label)
         self.screen.add_widget(self.username)
         self.screen.add_widget(button)
         return self.screen
