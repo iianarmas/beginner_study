@@ -14,6 +14,11 @@ MDBoxLayout:
         #color_mode: "accent"
         #line_color_normal: [0, 0, 1]
 
+    MDTextFieldRect:
+        hint_text: "Type here"
+        size_hint: 1, None
+        height: self.height
+
     Screen:
         RelativeLayout:
             id: rel_layout
@@ -34,5 +39,3 @@ MDBoxLayout:
                 on_release:
                     self.icon = "eye" if self.icon == "eye-off" else "eye-off"
                     round_text_field.password = False if round_text_field.password == True else True
-
-
