@@ -1,0 +1,38 @@
+MDBoxLayout:
+    orientation: "vertical"
+    size_hint_x: 0.8
+    size_hint_y: None
+    adaptive_height: True
+    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+    spacing: "100dp"
+    MDTextField:
+        hint_text: "Enter username"
+        #required: True
+        helper_text: "Forgot username?"
+        helper_text_mode: "persistent"
+        max_text_length: 15
+        #color_mode: "accent"
+        #line_color_normal: [0, 0, 1]
+
+    Screen:
+        RelativeLayout:
+            id: rel_layout
+            MDTextFieldRound:
+                id: round_text_field
+                hint_text: "Password"
+                hint_text_color: 1,1,1,1
+                # color_actve: app.theme_cls.primary_light
+                foreground_color: app.theme_cls.primary_color
+                normal_color: app.theme_cls.primary_color       # controls the color of typed-texts
+                #cursor_color: 0,0,0,0
+                password: True
+
+            MDIconButton:
+                icon: "eye-off"
+                ripple_scale: 0.5
+                pos: round_text_field.width - self.width + dp(8), rel_layout.height / 2 - dp(10)
+                on_release:
+                    self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+                    round_text_field.password = False if round_text_field.password == True else True
+
+
