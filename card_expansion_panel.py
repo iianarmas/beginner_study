@@ -1,8 +1,7 @@
 from kivy.animation import Animation
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelThreeLine, MDExpansionPanelLabel, \
-    MDExpansionPanelOneLine
+from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
 from kivy.lang import Builder
 
 smp = """
@@ -10,13 +9,11 @@ MDGridLayout:
     cols: 2
     MDRelativeLayout:
         MDCard:
-            id: card
             orientation: "vertical"
             pos_hint: {"center_x": 0.55, "center_y": 0.5}
             size_hint: 0.8, None
             height: self.minimum_height
-            padding: "10dp"
-            spacing: "10dp"
+            #focus_behavior: True
             MDBoxLayout:
                 id: box
                 size_hint_y: None
@@ -25,8 +22,14 @@ MDGridLayout:
                     source: "nezuko.png"
                     size_hint: 1, None
                     height: "300dp"
-                    #allow_stretch: True
-                    #keep_ratio: False
+                    allow_stretch: True
+                    keep_ratio: False
+            MDBoxLayout:
+                id: card
+                orientation: "vertical"
+                size_hint: 1, None
+                height: self.minimum_height
+                padding: "10dp"
 
 
 
@@ -59,13 +62,12 @@ MDGridLayout:
         font_style: "Subtitle1"
     MDBoxLayout:
         spacing: "10dp"
-        MDRaisedButton:
+        MDFillRoundFlatButton:
             text: "Continue"
-            font_style: "Button"
-        MDRectangleFlatButton:
+            font_style: "Button"       
+        MDRoundFlatButton:
             text: "Cancel"
-            font_style: "Button"
-    
+            font_style: "Button"    
 """
 
 
@@ -94,12 +96,14 @@ class DemoApp(MDApp):
     def panel_open(self, *args):
         Animation(
             height=(self.root.ids.box.height - self.root.ids.content.height) + self.theme_cls.standard_increment
-                   * 2, d=0.2).start(self.root.ids.box)
+                   * 2, d=0.2
+                    ).start(self.root.ids.box)
 
     def panel_close(self, *args):
         Animation(
             height=(self.root.ids.box.height - self.root.ids.content.height) +
-                   self.theme_cls.standard_increment * 2, d=0.2).start(self.root.ids.box)
+                   self.theme_cls.standard_increment * 2, d=0.2
+                ).start(self.root.ids.box)
 
 
 if __name__ == "__main__":
