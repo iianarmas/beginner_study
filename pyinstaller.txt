@@ -1,0 +1,54 @@
+## pyinstaller spec file:
+import os
+os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
+
+import sys
+
+from kivy_deps import sdl2, angle
+
+from kivymd import hooks_path as kivymd_hooks_path
+
+# -*- mode: python ; coding: utf-8 -*-
+
+
+block_cipher = None
+
+
+a = Analysis(['C:/Users/iian/Documents/please work/main.py'],
+             pathex=['C:\\Users\\iian\\Documents\\please work'],
+             binaries=[],
+             datas=[('C:/Users/iian/Documents/please work/login.kv', '.'), ('C:/Users/iian/Documents/please work/fonts', 'fonts/')],
+             hiddenimports=[],
+             hookspath=[kivymd_hooks_path],
+             hooksconfig={},
+             runtime_hooks=[],
+             excludes=[],
+             win_no_prefer_redirects=False,
+             win_private_assemblies=False,
+             cipher=block_cipher,
+             noarchive=False)
+pyz = PYZ(a.pure, a.zipped_data,
+             cipher=block_cipher)
+
+exe = EXE(pyz,
+          a.scripts,
+          a.binaries,
+          a.zipfiles,
+          a.datas,
+		  *[Tree(p) for p in (sdl2.dep_bins + angle.dep_bins)],
+          [],
+          name='main',
+          debug=False,
+          bootloader_ignore_signals=False,
+          strip=False,
+          upx=True,
+          upx_exclude=[],
+          runtime_tmpdir=None,
+          console=False,
+          disable_windowed_traceback=False,
+          target_arch=None,
+          codesign_identity=None,
+          entitlements_file=None )
+
+## pyinstaller install:
+pyinstaller --noconfirm --onefile --windowed --add-data "C:/Users/iian/Documents/please work/login.kv;." --add-data "C:/Users/iian/Documents/please work/fonts/Poppins-Bold.ttf;." --add-data "C:/Users/iian/Documents/please work/fonts/Poppins-Regular.ttf;." --add-data "C:/Users/iian/Documents/please work/fonts/Poppins-SemiBold.ttf;."  "C:/Users/iian/Documents/please work/main.py"
