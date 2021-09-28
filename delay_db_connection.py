@@ -14,7 +14,10 @@ class Main:
     # method to delay the initialization of db connection
     def initialize_db(self):
         connect = Connection()
-        connect.get_data()
+        
+        # using generator, code should look like this
+        for i in connect.get_data():
+            print(i)
 
     def greet_person(self):
         print(f'{self.greet} Iian')
@@ -62,9 +65,10 @@ class Connection:
             print('Sorry you have no connection')
         else:
             cursor.execute('select * from main_service')
-
+            
+            # using generator to optimize memory
             for i in cursor.fetchall():
-                print(i)
+                yield i
 
 
 if __name__ == '__main__':
