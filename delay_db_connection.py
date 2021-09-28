@@ -58,7 +58,7 @@ class Connection:
 
     def get_data(self):
         # condition if there is no connection
-        if self.connection_check() == False:
+        if self._connection_check() == False:
             print('Sorry you have no connection')
         else:
             cursor.execute('select * from main_service')
