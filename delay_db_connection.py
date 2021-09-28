@@ -43,7 +43,7 @@ class Connection:
         
 
     # method to check internet connection
-    def connection_check(self):
+    def _connection_check(self):
         if (subprocess.call(self.command) == 0) == True:
             global db, cursor
             db = mysql.connector.connect(
