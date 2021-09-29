@@ -30,4 +30,35 @@ except urllib.error.HTTPError as err:  # can use URLError for host or IP
     print(f'url:  {err.url}')
     
 # ==========================
+## Headers
 
+from urllib.request import urlopen
+
+
+response = urlopen('http://www.debian.org')
+
+# printing response and converting it to utf
+print(response.readline().decode('utf-8'))
+print()
+
+# printing url address
+print(f'URL: {response.url}')
+print()
+
+# printing status code
+print(f'STATUS: {response.status}')
+print()
+
+# getting headers ----------
+head = response.getheaders()
+
+# by default, getheaders() will return a list of tuples,
+# creating a dictionary is one option for nicer printing of info (I think)
+
+element_dict = {}
+
+for i, element in enumerate(head):
+    element_dict[element[0]] = element[1]
+
+for key, value in element_dict.items():
+    print(f'{key}: {value}')
